@@ -1,0 +1,28 @@
+map-reduce:
+  image:
+    name: mapper
+    imageTag: latest
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      memory: 100Mi
+      cpu: 0.2
+    limits:
+      memory: 200Gi
+      cpu: 0.4
+
+  autoscaling:
+    minReplicas: 2
+    maxReplicas: 2
+
+  service:
+    type: ClusterIP
+    service_port: 8080
+
+  ingress:
+    ingressClassName: "ingress-nginx"
+    domain: "test.com"
+
+  podDisruptionBudget:
+    enabled: false
