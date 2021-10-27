@@ -10,4 +10,4 @@ ADD app /app/
 
 RUN  pip install -r /app/requirement.txt
 
-ENTRYPOINT python /app/mapper.py
+ENTRYPOINT python /app/reducer.py

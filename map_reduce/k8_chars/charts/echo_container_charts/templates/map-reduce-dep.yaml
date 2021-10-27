@@ -1,11 +1,11 @@
 apiVersion: "apps/v1"
 kind: Deployment
 metadata:
-  name:  {{.Release.Name}}
+  name:  {{.Release.Name}}-worker
   labels: &labels
     app: {{ .Release.Name}}
     chart: {{ .Chart.Name}}
-    type: {{ .Values.image.type }}
+    type: {{ .Values.map_reduce_worker.image.type }}
 spec:
   selector:
     matchLabels: *labels
@@ -15,13 +15,13 @@ spec:
     spec:       
       containers:
         - name: {{.Release.Name}}
-          image: {{ .Values.image.name }}:{{ .Values.image.imageTag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.map_reduce_worker.image.name }}:{{ .Values.map_reduce_worker.image.imageTag }}
+          imagePullPolicy: {{ .Values.map_reduce_worker.image.pullPolicy }}
           env:
           - name: MAP_REDUCE_SVC
             value: {{.Release.Name}}-headless
           - name: TYPE
-            value: {{ .Values.map_reduce_worker.image.type }}            
+            value: {{ .Values.map_reduce_worker.image.type }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           ports:

@@ -5,6 +5,7 @@ metadata:
   labels:
     app: {{.Release.Name}}
     chart: {{ .Chart.Name}}
+    type: {{ .Values.image.type }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -12,4 +13,22 @@ spec:
     name: {{.Release.Name}}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  targetCPUUtilizationPercentage: 60
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{.Release.Name }}-worker
+  labels:
+    app: {{.Release.Name}}
+    chart: {{ .Chart.Name}}
+    type: {{ .Values.map_reduce_worker.image.type }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{.Release.Name}}-worker
+  minReplicas: {{ .Values.map_reduce_worker.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.map_reduce_worker.autoscaling.maxReplicas }}
   targetCPUUtilizationPercentage: 60

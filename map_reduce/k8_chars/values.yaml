@@ -1,8 +1,9 @@
 map-reduce:
   image:
-    name: mapper
+    name: map_reduce
     imageTag: latest
     pullPolicy: IfNotPresent
+    type: master
 
   resources:
     requests:
@@ -26,3 +27,13 @@ map-reduce:
 
   podDisruptionBudget:
     enabled: false
+
+  map_reduce_worker:
+    image:
+      name: map_reduce_reducer
+      imageTag: latest
+      pullPolicy: IfNotPresent
+      type: worker
+    autoscaling:
+      minReplicas: 4
+      maxReplicas: 4
