@@ -4,7 +4,7 @@ Trying to implement Map-Reduce on k8s
 Rough doc to use the repo :-
 * Install charts from k8s-charts folder
 
-  `helm install -n map map k8_chars --create-namespace`
+  `helm install -n map map k8_charts --create-namespace`
   
 * Should spin two masters and 4 worker replicas
 
