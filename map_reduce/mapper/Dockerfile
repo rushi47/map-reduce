@@ -6,7 +6,13 @@ RUN apt-get update && apt-get install -y vim
 
 RUN mkdir /app
 
+RUN mkdir /app/raw_data
+
 ADD app /app/
+
+ADD raw_data /app/raw_data/
+
+ADD page_rank_data /app/page_rank_data/
 
 RUN  pip install -r /app/requirement.txt
 

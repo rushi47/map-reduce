@@ -17,7 +17,7 @@ def get_ips():
     print(f"Service name from env - {svc_name}")
     pod_eps = socket.getaddrinfo(svc_name,0,socket.AF_INET,socket.SOCK_DGRAM)
     for ip in pod_eps:            
-        print(f"Pod ips -   {ip[-1][0]}")
+        # print(f"Pod ips -   {ip[-1][0]}")
         pod_ips.append(ip[-1][0])
     return pod_ips
 

@@ -11,11 +11,11 @@ from collections import defaultdict
 logger = logging.getLogger('mapper_logger')
 
 
+path_of_file = "Latin-Lipsum.txt"
 
 def split_file():
     #create bag of words from file
     bag = []
-    path_of_file = "Latin-Lipsum.txt"
     with open(path_of_file, "r") as file:
         for line in file.readlines():
             for word in line.split():
@@ -119,14 +119,14 @@ async def main():
     bag = split_file()
     task = asyncio.create_task(create_mapping(pod_ips, bag))
     await asyncio.gather(task)
-    print('not waiting')
+    # print('not waiting')
     map_to_list = convert_map_list(global_map)
     print(len(map_to_list))
 
     reduce_task = asyncio.create_task(reduce(map_to_list, pod_ips))
     result  = await asyncio.gather(reduce_task)
-    print("---- RESULT ---")
-    print(result)
+    print("---- RESULT ---", path_of_file)
+    # print(result)
     
     
 
